@@ -1,0 +1,33 @@
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const Wine = require("./models/Wine");
+const wineController = require("./controllers/wineController");
+
+const app = express();
+const port = 5001;
+
+mongoose.connect("mongodb://127.0.0.1:27017/products", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+
+db.on("connected", async () => {
+  console.log("Mongoose connected to Products database");
+});
+
+db.on("error", (err) => {
+  console.error(`Mongoose connection error: ${err}`);
+});
+
+db.on("disconnected", () => {
+  console.log("Mongoose disconnected from Products database");
+});
+
+app.get("/wines", wineController.getWines);
+
+app.listen(port, () => {
+  console.log(`Server is running on http://localhost:${port}`);
+});

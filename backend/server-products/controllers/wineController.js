@@ -44,10 +44,19 @@ const getWineById = async (req, res) => {
 };
 
 const updateWine = async (req, res) => {
+  const wineId = req.params.id;
+  const { name, price, description, photo, qty, category } = req.body;
   try {
-    const wineId = req.params.id;
-    const wineDto = new WineDto(req.body);
-    const updatedWine = await wineService.updateWine(wineId, wineDto);
+    const newWineDto = new WineDto(
+      name,
+      price,
+      description,
+      photo,
+      qty,
+      category
+    );
+    const idDto = new WineByIdDto(wineId);
+    const updatedWine = await wineService.updateWine(idDto.id, newWineDto);
     res.json(updatedWine);
   } catch (error) {
     console.error(error);

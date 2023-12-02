@@ -12,13 +12,21 @@ const getWines = async (req, res) => {
 };
 
 const createWine = async (req, res) => {
+  const { name, price, description, photo, qty, category } = req.body;
   try {
-    const wineDto = new WineDto(req.body);
-    const wine = await wineService.createWine(wineDto);
-    res.json(wine);
+    const newWineDto = new WineDto(
+      name,
+      price,
+      description,
+      photo,
+      qty,
+      category
+    );
+    const wine = await wineService.createWine(newWineDto);
+    res.json(wine.id);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error creating new wine");
   }
 };
 
@@ -29,7 +37,7 @@ const getWineById = async (req, res) => {
     res.json(wine);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error getting wine by id");
   }
 };
 
@@ -41,7 +49,7 @@ const updateWine = async (req, res) => {
     res.json(updatedWine);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error updating wine");
   }
 };
 
@@ -52,7 +60,7 @@ const deleteWine = async (req, res) => {
     res.json(deletedWine);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Error with deleting of this wine");
   }
 };
 

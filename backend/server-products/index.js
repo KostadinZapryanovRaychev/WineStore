@@ -1,7 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
-const Wine = require("./models/Wine");
 const wineController = require("./controllers/wineController");
 
 const app = express();
@@ -27,6 +26,10 @@ db.on("disconnected", () => {
 });
 
 app.get("/wines", wineController.getWines);
+app.post("/wines", wineController.createWine);
+app.get("/wines/:id", wineController.getWineById);
+app.put("/wines/:id", wineController.updateWine);
+app.delete("/wines/:id", wineController.deleteWine);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

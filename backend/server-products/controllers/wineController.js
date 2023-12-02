@@ -56,9 +56,10 @@ const updateWine = async (req, res) => {
 };
 
 const deleteWine = async (req, res) => {
+  const wineId = req.params.id;
   try {
-    const wineId = req.params.id;
-    const deletedWine = await wineService.deleteWine(wineId);
+    const idDto = new WineByIdDto(wineId);
+    const deletedWine = await wineService.deleteWine(idDto.id);
     res.json(deletedWine);
   } catch (error) {
     console.error(error);

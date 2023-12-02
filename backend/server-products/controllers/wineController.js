@@ -1,5 +1,6 @@
 const wineService = require("../services/wineService");
 const WineDto = require("../dtos/wineDto");
+const WineByIdDto = require("../dtos/wineByIdDto");
 
 const getWines = async (req, res) => {
   try {
@@ -7,7 +8,7 @@ const getWines = async (req, res) => {
     res.json(wines);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send("Server error getting all wines");
   }
 };
 
@@ -31,13 +32,14 @@ const createWine = async (req, res) => {
 };
 
 const getWineById = async (req, res) => {
+  const wineId = req.params.id;
   try {
-    const wineId = req.params.id;
-    const wine = await wineService.getWineById(wineId);
+    const idDto = new WineByIdDto(wineId);
+    const wine = await wineService.getWineById(idDto.id);
     res.json(wine);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error getting wine by id");
+    res.status(500).send("Error getting this wine");
   }
 };
 

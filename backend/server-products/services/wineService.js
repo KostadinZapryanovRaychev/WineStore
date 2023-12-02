@@ -7,7 +7,7 @@ const getWines = async () => {
     return wines;
   } catch (error) {
     console.error(error);
-    throw new Error("Internal Server Error");
+    throw new Error("Server error getting all wines");
   }
 };
 

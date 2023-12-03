@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 const getUsers = async () => {
   try {
@@ -17,6 +18,8 @@ const registerUser = async (userDto) => {
     if (existingUser) {
       throw new Error("User with the same email already exists");
     }
+    const hashedPassword = await bcrypt.hash(userDto.password, 10);
+    userDto.password = hashedPassword;
     const user = new User(userDto);
     await user.save();
 

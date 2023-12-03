@@ -27,11 +27,11 @@ db.on("disconnected", () => {
   console.log("Mongoose disconnected from Products database");
 });
 
-app.get("/wines", wineController.getWines);
-app.post("/wines", wineController.createWine);
-app.get("/wines/:id", wineController.getWineById);
-app.put("/wines/:id", wineController.updateWine);
-app.delete("/wines/:id", wineController.deleteWine);
+app.get("/", wineController.getWines);
+app.post("/", wineController.createWine);
+app.get("/:id", wineController.getWineById);
+app.put("/:id", wineController.updateWine);
+app.delete("/:id", wineController.deleteWine);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

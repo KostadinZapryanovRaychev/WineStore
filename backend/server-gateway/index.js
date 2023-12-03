@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const proxy = require("express-http-proxy");
 const { authenticateMiddleware } = require("./auth/auth");
-const path = require("path");
 
 const app = express();
 const port = 5000;

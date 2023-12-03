@@ -41,7 +41,9 @@ const getUserById = async (userId) => {
 const updateUser = async (userId, userDto) => {
   try {
     const user = await User.findByIdAndUpdate(userId, userDto, {
-      new: true, // Return the updated document
+      new: true,
+
+      
     });
     return user;
   } catch (error) {

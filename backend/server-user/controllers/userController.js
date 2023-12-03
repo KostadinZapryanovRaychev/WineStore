@@ -1,5 +1,6 @@
 const userService = require("../services/userService");
 const UserDto = require("../dtos/userDto");
+const UserByIdDto = require("../dtos/userByIdDto");
 
 const getUsers = async (req, res) => {
   try {
@@ -32,8 +33,11 @@ const registerUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const userId = req.params.id;
+  if (!userId || !mongoose.isValidObjectId(userId)) {
+    return res.status(404).json({ error: "User not found" });
+  }
   try {
-    const idDto = new UserDto(userId);
+    const idDto = new UserByIdDto(userId);
     const user = await userService.getUserById(idDto.id);
     res.json(user);
   } catch (error) {

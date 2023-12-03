@@ -31,22 +31,29 @@ const registerUser = async (userDto) => {
 const getUserById = async (userId) => {
   try {
     const user = await User.findById(userId);
+    if (!user) {
+      throw new Error("There is no user with such an id");
+    }
     return user;
   } catch (error) {
-    console.error(error);
-    throw new Error("Error getting user by ID");
+    const errorMessage = error.message || "Error getting this user";
+    throw new Error(errorMessage);
   }
 };
 
 const updateUser = async (userId, userDto) => {
+  console.log(userId);
   try {
     const user = await User.findByIdAndUpdate(userId, userDto, {
       new: true,
     });
+    if (!user) {
+      throw new Error("There is no user with such an id");
+    }
     return user;
   } catch (error) {
-    console.error(error);
-    throw new Error("Error updating user");
+    const errorMessage = error.message || "Error updating the user";
+    throw new Error(errorMessage);
   }
 };
 

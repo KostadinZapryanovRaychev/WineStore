@@ -48,10 +48,19 @@ const getUserById = async (req, res) => {
 
 const updateUser = async (req, res) => {
   const userId = req.params.id;
-  const { username, password } = req.body;
+  const { email, password, firstName, lastName, birthDate } = req.body;
+  if (!userId) {
+    return res.status(404).json({ error: "User not found" });
+  }
   try {
-    const newUserDto = new UserDto(username, password);
-    const idDto = new UserDto(userId);
+    const newUserDto = new UserDto(
+      email,
+      password,
+      firstName,
+      lastName,
+      birthDate
+    );
+    const idDto = new UserByIdDto(userId);
     const updatedUser = await userService.updateUser(idDto.id, newUserDto);
     res.json(updatedUser);
   } catch (error) {

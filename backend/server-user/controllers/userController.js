@@ -33,7 +33,7 @@ const registerUser = async (req, res) => {
 
 const getUserById = async (req, res) => {
   const userId = req.params.id;
-  if (!userId || !mongoose.isValidObjectId(userId)) {
+  if (!userId) {
     return res.status(404).json({ error: "User not found" });
   }
   try {
@@ -62,13 +62,16 @@ const updateUser = async (req, res) => {
 
 const deleteUser = async (req, res) => {
   const userId = req.params.id;
+  if (!userId) {
+    return res.status(404).json({ error: "User not found" });
+  }
   try {
-    const idDto = new UserDto(userId);
+    const idDto = new UserByIdDto(userId);
     const deletedUser = await userService.deleteUser(idDto.id);
     res.json(deletedUser);
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error with deleting this user");
+    const errorMessage = error.message || "Error deleting the user";
+    res.status(500).send(errorMessage);
   }
 };
 

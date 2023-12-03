@@ -42,8 +42,6 @@ const updateUser = async (userId, userDto) => {
   try {
     const user = await User.findByIdAndUpdate(userId, userDto, {
       new: true,
-
-      
     });
     return user;
   } catch (error) {
@@ -54,11 +52,14 @@ const updateUser = async (userId, userDto) => {
 
 const deleteUser = async (userId) => {
   try {
-    const user = await User.findByIdAndRemove(userId);
+    const user = await User.findByIdAndDelete(userId);
+    if (!user) {
+      throw new Error("There is no user with such an id");
+    }
     return user;
   } catch (error) {
-    console.error(error);
-    throw new Error("Error deleting user");
+    const errorMessage = error.message || "Error deletiung the user";
+    throw new Error(errorMessage);
   }
 };
 

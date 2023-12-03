@@ -12,12 +12,19 @@ const getUsers = async () => {
 
 const registerUser = async (userDto) => {
   try {
+    const existingUser = await User.findOne({ email: userDto.email });
+
+    if (existingUser) {
+      throw new Error("User with the same email already exists");
+    }
     const user = new User(userDto);
     await user.save();
+
     return user;
   } catch (error) {
     console.error(error);
-    throw new Error("Error creating new user");
+    const errorMessage = error.message || "Error creating new user";
+    throw new Error(errorMessage);
   }
 };
 

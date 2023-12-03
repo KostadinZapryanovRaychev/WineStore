@@ -1,5 +1,5 @@
 const userService = require("../services/userService");
-const UserDto = require("../dtos/serDto");
+const UserDto = require("../dtos/userDto");
 
 const getUsers = async (req, res) => {
   try {
@@ -12,14 +12,21 @@ const getUsers = async (req, res) => {
 };
 
 const registerUser = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password, firstName, lastName, birthDate } = req.body;
   try {
-    const newUserDto = new UserDto(username, password);
+    const newUserDto = new UserDto(
+      email,
+      password,
+      firstName,
+      lastName,
+      birthDate
+    );
     const user = await userService.registerUser(newUserDto);
     res.json(user.id);
   } catch (error) {
     console.error(error);
-    res.status(500).send("Error registering new user");
+    const errorMessage = error.message || "Error registering new user";
+    res.status(500).send(errorMessage);
   }
 };
 

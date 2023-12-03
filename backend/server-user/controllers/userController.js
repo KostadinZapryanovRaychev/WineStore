@@ -1,6 +1,7 @@
 const userService = require("../services/userService");
 const UserDto = require("../dtos/userDto");
 const UserByIdDto = require("../dtos/userByIdDto");
+const validator = require("../helpers/validators");
 
 const getUsers = async (req, res) => {
   try {
@@ -85,13 +86,16 @@ const deleteUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+  if (!validator.isValidEmail(email)) {
+    return res.status(400).json({ error: "Invalid email format" });
+  }
   try {
-    const { username, password } = req.body;
-    const token = await userService.loginUser(username, password);
+    const token = await userService.loginUser(email, password);
     res.json({ token });
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Error logging in");
+    const errorMessage = error.message || "Error logging";
+    res.status(500).send(errorMessage);
   }
 };
 

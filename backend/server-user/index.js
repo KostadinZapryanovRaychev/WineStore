@@ -32,7 +32,7 @@ app.post("/users", userController.registerUser);
 app.get("/users/:id", userController.getUserById);
 app.put("/users/:id", userController.updateUser);
 app.delete("/users/:id", userController.deleteUser);
-app.post("/login", userController.loginUser);
+app.post("/users/login", userController.loginUser);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

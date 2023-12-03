@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const getUsers = async () => {
   try {
@@ -75,13 +76,22 @@ const deleteUser = async (userId) => {
 
 const loginUser = async (email, password) => {
   try {
-    const user = await User.findOne({ email, password });
+    const user = await User.findOne({ email });
 
     if (!user) {
       throw new Error("Invalid email or password");
     }
 
-    return user;
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordMatch) {
+      throw new Error("Invalid email or password");
+    }
+    const token = jwt.sign({ userId: user._id }, "TODO-secret-key", {
+      expiresIn: "1h",
+    });
+
+    return token;
   } catch (error) {
     console.error(error);
     throw new Error("Error during login");

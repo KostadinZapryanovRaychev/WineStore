@@ -6,6 +6,8 @@ const wineController = require("./controllers/wineController");
 const app = express();
 const port = 5001;
 
+app.use("/public", express.static("public"));
+
 app.use(express.json());
 
 mongoose.connect("mongodb://127.0.0.1:27017/products", {

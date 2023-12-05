@@ -1,0 +1,51 @@
+/* WineCard.css */
+
+.wine-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.wine-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.wine-details {
+  margin-top: 10px;
+}
+
+.wine-price {
+  font-weight: bold;
+  color: #c0392b;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.edit-button,
+.delete-button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #2980b9;
+}
+
+

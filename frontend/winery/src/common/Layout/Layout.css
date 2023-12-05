@@ -13,6 +13,34 @@
   box-sizing: border-box;
 }
 
+.left-section a,
+.right-section a {
+  margin-right: 10px;
+  color: #fff;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+
+  &:hover {
+    text-decoration: none;
+    background-color: #2980b9;
+  }
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.left-section,
+.right-section {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .main-content {
   background-color: #ecf0f1;
   flex-grow: 1;

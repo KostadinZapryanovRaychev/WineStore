@@ -5,8 +5,8 @@ import { BrowserRouter } from "react-router-dom";
 
 import "./index.css";
 import { ApplicationProvider } from "./context/ApplicatinContext";
-import TestComponent from "./components/TestComponent/TestComponent";
 import Layout from "./common/Layout/Layout";
+import WineList from "./components/TestComponent/WineList/WineList";
 
 const App = () => (
   <BrowserRouter>
@@ -16,7 +16,7 @@ const App = () => (
         <div>Framework: react</div>
         <div>Language: JavaScript</div>
         <div>CSS: Empty CSS</div>
-        <TestComponent />
+        <WineList />
       </Layout>
     </ApplicationProvider>
   </BrowserRouter>

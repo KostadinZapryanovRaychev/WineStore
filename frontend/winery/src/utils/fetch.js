@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const baseUrl = `${process.env.API_BASE_URL}`;
+//const baseUrl = `${process.env.API_BASE_URL}`;
+
+const localUrl = "http://localhost:5000";
 
 function getAuthToken() {
   return sessionStorage.getItem("authToken");
@@ -16,7 +18,7 @@ function setAuthHeaders(customHeaders = {}) {
 
 function makeRequest(url, method, dataOrParams, customHeaders = {}) {
   return axios({
-    url: `${baseUrl}${url}`,
+    url: `${localUrl}${url}`,
     method: method,
     data: method === "GET" ? undefined : dataOrParams,
     params: method === "GET" ? dataOrParams : undefined,

@@ -1,7 +1,8 @@
 const jwt = require("jsonwebtoken");
 
 function authenticateMiddleware(req, res, next) {
-  const token = req.headers.authorization;
+  const authorizationHeader = req.headers.authorization;
+  const [bearer, token] = authorizationHeader.split(" ");
 
   if (!token) {
     return res.status(401).json({ error: "Unauthorized - Token missing" });

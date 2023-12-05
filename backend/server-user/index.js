@@ -28,7 +28,7 @@ db.on("disconnected", () => {
 });
 
 app.get("/", userController.getUsers);
-app.post("/", userController.registerUser);
+app.post("/register", userController.registerUser);
 app.get("/:id", userController.getUserById);
 app.put("/:id", userController.updateUser);
 app.delete("/:id", userController.deleteUser);

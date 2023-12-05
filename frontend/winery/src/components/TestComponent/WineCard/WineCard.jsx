@@ -2,10 +2,11 @@
 
 import React from "react";
 import "./WineCard.css";
+import { useApp } from "../../../context/ApplicatinContext";
 
 function WineCard({ wineData, onEditClick, onDeleteClick }) {
   const { id, name, price, description, photo, qty, category } = wineData;
-
+  const { isLoggedIn } = useApp();
   return (
     <div className="wine-card">
       <img src={photo} alt={name} className="wine-image" />
@@ -16,15 +17,16 @@ function WineCard({ wineData, onEditClick, onDeleteClick }) {
         <p>Available Quantity: {qty}</p>
         <p>Category: {category}</p>
       </div>
-
-      <div className="button-container">
-        <button className="edit-button" onClick={onEditClick}>
-          Edit
-        </button>
-        <button className="delete-button" onClick={onDeleteClick}>
-          Delete
-        </button>
-      </div>
+      {isLoggedIn && (
+        <div className="button-container">
+          <button className="edit-button" onClick={onEditClick}>
+            Edit
+          </button>
+          <button className="delete-button" onClick={onDeleteClick}>
+            Delete
+          </button>
+        </div>
+      )}
     </div>
   );
 }

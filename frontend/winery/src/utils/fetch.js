@@ -5,7 +5,8 @@ import axios from "axios";
 const localUrl = "http://localhost:5000";
 
 function getAuthToken() {
-  return sessionStorage.getItem("authToken");
+  const token = sessionStorage.getItem("authToken");
+  return token;
 }
 
 function setAuthHeaders(customHeaders = {}) {
@@ -17,6 +18,7 @@ function setAuthHeaders(customHeaders = {}) {
 }
 
 function makeRequest(url, method, dataOrParams, customHeaders = {}) {
+  console.log("Headers:", setAuthHeaders(customHeaders));
   return axios({
     url: `${localUrl}${url}`,
     method: method,

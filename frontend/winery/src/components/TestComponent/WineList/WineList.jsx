@@ -15,6 +15,9 @@ function WineList() {
     console.log(`Delete button clicked for wine with id ${id}`);
   };
 
+
+  
+
   return (
     <div className="wine-list">
       {wines.map((wineData) => (

@@ -10,6 +10,7 @@ export function useApp() {
 export function ApplicationProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(true);
+  const [hasBeenNewWineCreated, setHasBeenNewWineCreated] = useState(false);
   const [wines, setWines] = useState([]);
 
   useEffect(() => {
@@ -23,6 +24,13 @@ export function ApplicationProvider({ children }) {
     };
 
     fetchWines();
+  }, [hasBeenNewWineCreated]);
+
+  useEffect(() => {
+    const token = getAuthToken();
+    if (token) {
+      setIsLoggedIn(true);
+    }
   }, []);
 
   const value = {
@@ -31,6 +39,7 @@ export function ApplicationProvider({ children }) {
     userId,
     setUserId,
     wines,
+    setHasBeenNewWineCreated,
   };
 
   return (
@@ -38,4 +47,9 @@ export function ApplicationProvider({ children }) {
       {children}
     </ApplicationContext.Provider>
   );
+}
+
+function getAuthToken() {
+  const token = sessionStorage.getItem("authToken");
+  return token;
 }

@@ -1,15 +1,34 @@
 import React from "react";
 import "./Layout.css";
 import Footer from "footer/Footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useApp } from "../../context/ApplicatinContext";
+import { logout } from "../../services/userService";
 
 function Layout({ children }) {
+  const { isLoggedIn, setIsLoggedIn } = useApp();
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      setIsLoggedIn(false);
+      navigate("/");
+    } catch (error) {
+      console.error("Error during logout:", error);
+    }
+  };
   return (
     <div className="container">
       <div className="header">
         <nav className="nav-bar">
           <div className="left-section">
-            <Link to="/login">Login</Link>
+            {!isLoggedIn ? (
+              <Link to="/login">Login</Link>
+            ) : (
+              <button onClick={handleLogout}>Logout</button>
+            )}
             <Link to="/register">Register</Link>
           </div>
           <div className="right-section">

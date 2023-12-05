@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./EditWine.css";
 import { updateWine } from "../../services/wineService";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useApp } from "../../context/ApplicatinContext";
+import { navigateToLogin } from "../../helpers/navigateLogin";
 
 function EditWine() {
   const navigate = useNavigate();
-  const { wine } = useLocation().state;
+  const { isLoggedIn } = useApp();
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigateToLogin(navigate, "/login");
+    }
+  }, []);
+
+  const { wine } = useLocation().state || {};
   const [editedWine, setEditedWine] = useState(wine);
   const { setHasBeenWineUpdated } = useApp();
 
@@ -31,14 +39,14 @@ function EditWine() {
     navigate("/wine-list");
   };
 
-  return (
+  return wine ? (
     <div className="edit-wine">
       <h2>Edit Wine</h2>
       <form>
         <label>Name:</label>
         <input
           type="text"
-          value={editedWine.name}
+          value={editedWine?.name}
           onChange={(e) =>
             setEditedWine({ ...editedWine, name: e.target.value })
           }
@@ -47,7 +55,7 @@ function EditWine() {
         <label>Price:</label>
         <input
           type="number"
-          value={editedWine.price}
+          value={editedWine?.price}
           onChange={(e) =>
             setEditedWine({ ...editedWine, price: parseFloat(e.target.value) })
           }
@@ -55,7 +63,7 @@ function EditWine() {
 
         <label>Description:</label>
         <textarea
-          value={editedWine.description}
+          value={editedWine?.description}
           onChange={(e) =>
             setEditedWine({ ...editedWine, description: e.target.value })
           }
@@ -64,7 +72,7 @@ function EditWine() {
         <label>Photo:</label>
         <input
           type="text"
-          value={editedWine.photo}
+          value={editedWine?.photo}
           onChange={(e) =>
             setEditedWine({ ...editedWine, photo: e.target.value })
           }
@@ -73,7 +81,7 @@ function EditWine() {
         <label>Quantity:</label>
         <input
           type="number"
-          value={editedWine.qty}
+          value={editedWine?.qty}
           onChange={(e) =>
             setEditedWine({ ...editedWine, qty: parseInt(e.target.value, 10) })
           }
@@ -82,7 +90,7 @@ function EditWine() {
         <label>Category:</label>
         <input
           type="text"
-          value={editedWine.category}
+          value={editedWine?.category}
           onChange={(e) =>
             setEditedWine({ ...editedWine, category: e.target.value })
           }
@@ -98,6 +106,8 @@ function EditWine() {
         </button>
       </div>
     </div>
+  ) : (
+    <div>Un Authorized Reuqeust</div>
   );
 }
 

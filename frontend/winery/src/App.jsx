@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Footer from "footer/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import "./index.css";
@@ -13,12 +12,12 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import CreateWinePage from "./pages/CreateWinePage/CreateWinePage";
 import EditWine from "./pages/EditWine/EditWine";
+import ErrorPage from "./pages/ErrorPage/ErrorPage";
 
 const App = () => (
   <BrowserRouter>
     <ApplicationProvider>
       <Layout>
-        <div>Name: winery</div>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/wine-list" element={<WineListPage />} />
@@ -27,6 +26,7 @@ const App = () => (
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/create-new-wine" element={<CreateWinePage />} />
           <Route path="/edit-wine" element={<EditWine />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Layout>
     </ApplicationProvider>

@@ -1,12 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CreateWinePage.css";
 import { createWine } from "../../services/wineService";
 import { useApp } from "../../context/ApplicatinContext";
+import { navigateToLogin } from "../../helpers/navigateLogin";
 
 function CreateWinePage() {
   const navigate = useNavigate();
-  const { setHasBeenNewWineCreated } = useApp();
+  const { setHasBeenNewWineCreated, isLoggedIn } = useApp();
+
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigateToLogin(navigate, "/login");
+    }
+  }, []);
 
   const [wineData, setWineData] = useState({
     name: "",

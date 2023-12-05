@@ -11,6 +11,8 @@ export function ApplicationProvider({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState(true);
   const [hasBeenNewWineCreated, setHasBeenNewWineCreated] = useState(false);
+  const [hasBeenWineDeleted, setHasBeenWineDeleted] = useState(false);
+  const [hasBeenWineUpdated, setHasBeenWineUpdated] = useState(false);
   const [wines, setWines] = useState([]);
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export function ApplicationProvider({ children }) {
     };
 
     fetchWines();
-  }, [hasBeenNewWineCreated]);
+  }, [hasBeenNewWineCreated, hasBeenWineDeleted, hasBeenWineUpdated]);
 
   useEffect(() => {
     const token = getAuthToken();
@@ -40,6 +42,8 @@ export function ApplicationProvider({ children }) {
     setUserId,
     wines,
     setHasBeenNewWineCreated,
+    setHasBeenWineDeleted,
+    setHasBeenWineUpdated,
   };
 
   return (

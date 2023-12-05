@@ -12,6 +12,7 @@ import ContactUsPage from "./pages/ContactUsPage/ContactUsPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import CreateWinePage from "./pages/CreateWinePage/CreateWinePage";
+import EditWine from "./pages/EditWine/EditWine";
 
 const App = () => (
   <BrowserRouter>
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/create-new-wine" element={<CreateWinePage />} />
+          <Route path="/edit-wine" element={<EditWine />} />
         </Routes>
       </Layout>
     </ApplicationProvider>

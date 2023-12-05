@@ -18,7 +18,6 @@ function setAuthHeaders(customHeaders = {}) {
 }
 
 function makeRequest(url, method, dataOrParams, customHeaders = {}) {
-  console.log("Headers:", setAuthHeaders(customHeaders));
   return axios({
     url: `${localUrl}${url}`,
     method: method,

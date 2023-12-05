@@ -29,7 +29,7 @@ function Layout({ children }) {
             ) : (
               <button onClick={handleLogout}>Logout</button>
             )}
-            <Link to="/register">Register</Link>
+            {!isLoggedIn && <Link to="/register">Register</Link>}
           </div>
           <div className="right-section">
             <Link to="/">Home</Link>

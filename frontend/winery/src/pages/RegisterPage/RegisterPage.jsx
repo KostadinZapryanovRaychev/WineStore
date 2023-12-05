@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./RegisterPage.css";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/userService";
+import { useApp } from "../../context/ApplicatinContext";
+import { navigateToLogin } from "../../helpers/navigateLogin";
 
 function RegisterPage() {
   const navigate = useNavigate();

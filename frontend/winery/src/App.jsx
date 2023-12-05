@@ -13,6 +13,7 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import CreateWinePage from "./pages/CreateWinePage/CreateWinePage";
 import EditWine from "./pages/EditWine/EditWine";
 import ErrorPage from "./pages/ErrorPage/ErrorPage";
+import AboutUsPage from "./pages/AboutUsPage/AboutUsPage";
 
 const App = () => (
   <BrowserRouter>
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/contact-us" element={<ContactUsPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+          <Route path="/who-we-are" element={<AboutUsPage />} />
           <Route path="/create-new-wine" element={<CreateWinePage />} />
           <Route path="/edit-wine" element={<EditWine />} />
           <Route path="*" element={<ErrorPage />} />

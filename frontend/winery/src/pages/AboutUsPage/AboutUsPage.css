@@ -1,0 +1,33 @@
+.about-us-page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.about-us-page h2 {
+  color: #5e3f6b;
+}
+
+.about-us-page h3 {
+  color: #4b2e5a;
+  margin-top: 20px;
+}
+
+.about-us-page p {
+  line-height: 1.6;
+  color: #333;
+}
+
+.about-us-page .about-us-image {
+  max-width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+
+.about-us-page blockquote {
+  font-style: italic;
+  color: #5e3f6b;
+  margin: 20px 0;
+}

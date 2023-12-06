@@ -19,11 +19,15 @@ function CreateWinePage() {
     name: "",
     price: 0,
     description: "",
-    photo: "",
+    photo: null,
     qty: 0,
     category: "",
   });
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setWineData((prevData) => ({ ...prevData, photo: file }));
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setWineData((prevData) => ({ ...prevData, [name]: value }));
@@ -50,62 +54,27 @@ function CreateWinePage() {
       <form onSubmit={handleSubmit}>
         <label>
           Name:
-          <input
-            type="text"
-            name="name"
-            value={wineData.name}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="name" value={wineData.name} onChange={handleChange} required />
         </label>
         <label>
           Price:
-          <input
-            type="number"
-            name="price"
-            value={wineData.price}
-            onChange={handleChange}
-            required
-          />
+          <input type="number" name="price" value={wineData.price} onChange={handleChange} required />
         </label>
         <label>
           Description:
-          <textarea
-            name="description"
-            value={wineData.description}
-            onChange={handleChange}
-            required
-          />
-        </label>
-        <label>
-          Photo URL:
-          <input
-            type="text"
-            name="photo"
-            value={wineData.photo}
-            onChange={handleChange}
-            required
-          />
+          <textarea name="description" value={wineData.description} onChange={handleChange} required />
         </label>
         <label>
           Quantity:
-          <input
-            type="number"
-            name="qty"
-            value={wineData.qty}
-            onChange={handleChange}
-            required
-          />
+          <input type="number" name="qty" value={wineData.qty} onChange={handleChange} required />
         </label>
         <label>
           Category:
-          <input
-            type="text"
-            name="category"
-            value={wineData.category}
-            onChange={handleChange}
-            required
-          />
+          <input type="text" name="category" value={wineData.category} onChange={handleChange} required />
+        </label>
+        <label>
+          Photo:
+          <input type="file" name="photo" onChange={handleFileChange} />
         </label>
         <button type="submit">Create Wine</button>
       </form>

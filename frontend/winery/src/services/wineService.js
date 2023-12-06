@@ -1,14 +1,12 @@
-import {
-  deleteFetch,
-  getFetch,
-  patchFetch,
-  postFetch,
-  putFetch,
-} from "../utils/fetch";
+import { deleteFetch, getFetch, patchFetch, postFetch, putFetch } from "../utils/fetch";
 
 export const createWine = async (wineData) => {
   try {
-    return await postFetch("/wines", wineData);
+    const formData = new FormData();
+    Object.entries(wineData).forEach(([key, value]) => {
+      formData.append(key, value);
+    });
+    return await postFetch("/wines", formData);
   } catch (error) {
     throw new Error("Error creating wine");
   }

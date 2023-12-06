@@ -6,13 +6,10 @@ const path = require("path");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "public");
+    cb(null, "../../public");
   },
   filename: function (req, file, cb) {
-    cb(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+    cb(null, file.fieldname + "-" + Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -36,16 +33,9 @@ const createWine = async (req, res) => {
     }
 
     const { name, price, description, qty, category } = req.body;
-    const photoUrl = req.file ? `/public/${req.file.filename}` : null;
+    const photo = req.file ? `/public/${req.file.filename}` : null;
     try {
-      const newWineDto = new WineDto(
-        name,
-        price,
-        description,
-        photoUrl,
-        qty,
-        category
-      );
+      const newWineDto = new WineDto(name, price, description, photo, qty, category);
       const wine = await wineService.createWine(newWineDto);
       res.json(wine.id);
     } catch (error) {
@@ -79,14 +69,7 @@ const updateWine = async (req, res) => {
     const photoUrl = req.file ? `/public/${req.file.filename}` : null;
 
     try {
-      const newWineDto = new WineDto(
-        name,
-        price,
-        description,
-        photoUrl,
-        qty,
-        category
-      );
+      const newWineDto = new WineDto(name, price, description, photoUrl, qty, category);
       const idDto = new WineByIdDto(wineId);
       const updatedWine = await wineService.updateWine(idDto.id, newWineDto);
       res.json(updatedWine);

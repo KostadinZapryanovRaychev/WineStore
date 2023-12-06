@@ -23,7 +23,7 @@ Clone the Repository:
 
 Copy code
 
-git clone https://github.com/your-username/wine-store.git
+git clone https://github.com/KostadinZapryanovRaychev/WineStore.git
 
 Install Dependencies:
 
